@@ -15,11 +15,18 @@
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
 
-          const endpoint = "https://script.google.com/macros/s/https://script.google.com/macros/s/AKfycbxiOznbB7mlo2ZQ64A5B2O-WtsKlVSg9mfHwJwuKEf2vIn47Fc1UjxeTGUORfgpgVPpwg/exec/exec";
+          const endpoint = "https://script.google.com/macros/s/AKfycbxiOznbB7mlo2ZQ64A5B2O-WtsKlVSg9mfHwJwuKEf2vIn47Fc1UjxeTGUORfgpgVPpwg/exec";
 
           fetch(`${endpoint}?lat=${latitude}&lon=${longitude}&device=${encodeURIComponent(deviceInfo)}`)
-            .then(response => alert("Terima kasih! Data kamu sudah dicatat."))
-            .catch(error => alert("Gagal mengirim data."));
+        .then(response => {
+            if (response.ok) {
+            alert("Data Kamu Aku Ambil Ya. Makasih!");
+            } else {
+            alert("Server error.");
+            }
+        })
+        .catch(error => alert("Gagal mengirim data: " + error));
+
         }, function(error) {
           alert("Gagal mengambil lokasi: " + error.message);
         });
