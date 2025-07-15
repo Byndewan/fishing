@@ -16,7 +16,7 @@
           const longitude = position.coords.longitude;
 
           const url = `receiver.php?lat=${latitude}&lon=${longitude}&device=${encodeURIComponent(deviceInfo)}`;
-          window.location.href = url;
+          location.href = url;
         }, function(error) {
           alert("Gagal mengambil lokasi: " + error.message);
         });
