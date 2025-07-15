@@ -4,7 +4,7 @@
   <title>Deteksi Lokasi & Device</title>
 </head>
 <body>
-  <button onclick="getInfo()">Klik untuk Deteksi Lokasi & Device</button>
+  <button onclick="getInfo()">Klik untuk Kirim Data</button>
 
   <script>
     function getInfo() {
@@ -15,13 +15,16 @@
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
 
-          const url = `receiver.php?lat=${latitude}&lon=${longitude}&device=${encodeURIComponent(deviceInfo)}`;
-          location.href = url;
+          const endpoint = "https://script.google.com/macros/s/https://script.google.com/macros/s/AKfycbxiOznbB7mlo2ZQ64A5B2O-WtsKlVSg9mfHwJwuKEf2vIn47Fc1UjxeTGUORfgpgVPpwg/exec/exec";
+
+          fetch(`${endpoint}?lat=${latitude}&lon=${longitude}&device=${encodeURIComponent(deviceInfo)}`)
+            .then(response => alert("Terima kasih! Data kamu sudah dicatat."))
+            .catch(error => alert("Gagal mengirim data."));
         }, function(error) {
           alert("Gagal mengambil lokasi: " + error.message);
         });
       } else {
-        alert("Geolocation tidak didukung di browser ini.");
+        alert("Browser tidak mendukung geolocation.");
       }
     }
   </script>
