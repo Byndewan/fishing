@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Deteksi Lokasi & Device</title>
+</head>
+<body>
+  <button onclick="getInfo()">Klik untuk Deteksi Lokasi & Device</button>
+
+  <script>
+    function getInfo() {
+      const deviceInfo = navigator.userAgent;
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+
+          const url = `receiver.php?lat=${latitude}&lon=${longitude}&device=${encodeURIComponent(deviceInfo)}`;
+          window.location.href = url;
+        }, function(error) {
+          alert("Gagal mengambil lokasi: " + error.message);
+        });
+      } else {
+        alert("Geolocation tidak didukung di browser ini.");
+      }
+    }
+  </script>
+</body>
+</html>
